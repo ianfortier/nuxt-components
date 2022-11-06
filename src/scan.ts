@@ -45,15 +45,17 @@ export async function scanComponents (dirs: ScanDir[], srcDir: string): Promise<
 
       const componentNameParts: string[] = []
 
-      while (prefixParts.length &&
+      /*while (prefixParts.length &&
         (prefixParts[0] || '').toLowerCase() !== (fileNameParts[0] || '').toLowerCase()
       ) {
         componentNameParts.push(prefixParts.shift()!)
-      }
+      }*/
 
-      const componentName = pascalCase(componentNameParts).replace(/^\d+/, '') +
+      const componentName = scule.pascalCase(prefixParts) + scule.pascalCase(fileNameParts)
+      /* const componentName = pascalCase(componentNameParts).replace(/^\d+/, '') +
          pascalCase(fileNameParts).replace(/^\d+/, '')
-
+      */
+      
       if (resolvedNames.has(componentName)) {
         // eslint-disable-next-line no-console
         console.warn(`Two component files resolving to the same name \`${componentName}\`:\n` +
